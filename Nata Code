@@ -1,0 +1,78 @@
+// Lab 7.cpp: This file contains the 'main' function. Program execution begins and ends there.
+//Team #1
+//Teammate 1: Pedro Marrero Miranda
+//Teammate 2: Natanael Gonzalez Rivera
+
+#include <iostream>
+
+using namespace std;
+
+const int studentNum = 50;
+const int labNum = 50;
+
+void getScore(int students, int lab);
+void printTable(int scores[studentNum][labNum], int studentAverages[studentNum], char grades[numStudentNum])
+
+void teamInfo(const int lab);
+
+int main()
+{
+
+	int score[numStudents][labNum];
+	int studentAverages[studentNum];
+	char grades[studentNum];
+ 
+	for (int i = 0; i < studentNum; i++) {
+		for (int j = 0; j < labNum; j++) {
+			score[i][j] = getScore(i + 1, j + 1);
+			
+		}
+	}
+
+	for (int i = 0; i < studentNum; i++) {
+		studentAverages[i] = computeAverage(scores[i]);
+		grades[i] = computeGrade(studentAverages[i]);
+	}
+
+	int getScore(int students, int lab);
+
+	printTable(scores, studentAverages, grades);
+
+	
+	
+
+	teamInfo(7)
+	return 0;
+}
+
+int getScore(int student, int lab) {
+	int score;
+	do {
+		cout << "Enter the score for student # " << Student << ", lab #" << Lab << ": ";
+		cin >> score;
+		if (score < 0 || score > 100) {
+			cout << "Error: score must be between 0 and 100. Try again.\n";
+		}
+	} while (score < 0 || score > 100);
+	return score;
+}
+
+
+void printTable(int scores[numStudents][NUM_LABS], int studentAverages[numStudents], char grades[numStudents]) {
+	cout << "\nResults Table:\n\n";
+	cout << "Student\tLab1\tLab2\tLab3\tAverage\tGrade\n";
+
+	for (int i = 0; i < numStudents; i++) {
+		cout << (i + 1) << "\t";
+		for (int j = 0; j < numLabs; j++) {
+			cout << scores[i][j] << "\t";
+		}
+		cout << studentAverages[i] << "\t" << grades[i] << endl;
+	}
+
+	void teamInfo(const int lab) {
+		cout << "Program for CECS 2203, Sec. 06, Lab " << lab
+			<< " developed by Team [number], composed by " << endl;
+		cout << "\tPedro Marrero Miranda, ID #155276" << endl;
+		cout << "\tNatanael Gonzalez Rivera, ID #120228" << endl;
+	}
