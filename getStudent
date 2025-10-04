@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+int getStudent(int);
+int main() {
+    int studentNum;
+    int studentID;
+    getStudent(studentNum);
+    return 0;
+}
+int getStudent(int studentNum){
+    int studentID = studentNum;
+    do {
+        cout << "Student number: " << endl;
+        cin >> studentID;
+        if (studentID < 0 || studentID > 50) {
+            cout << "Error! Invalid number. Try again."  << endl;
+        }
+    }while (studentID >= 0 || studentID <= 50);
+    return studentID;
+}
