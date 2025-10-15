@@ -1,0 +1,122 @@
+// Lab 7.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// Team #1
+// Teammate 1: Pedro Marrero Miranda
+// Teammate 2: Natanael Gonzalez Rivera
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+const int max_students = 50;
+const int max_labs = 50;
+
+int getScore(string studentName, int lab);
+int getstudentAverages(int scores[], int numlab);
+string getLetterGrade(double grade);
+void printTable(string names[], int scores[][max_labs], int studentAverages[], string grades[], int numStudents, int numLabs);
+void teamInfo(const int lab);
+
+int main() {
+    int numStudents, numLabs;
+
+    cout << "--------------------------------\n";
+    cout << " CECS 2203 - Lab 7 \n";
+    cout << "--------------------------------\n";
+
+    cout << "Enter the number of students (max 50): ";
+    cin >> numStudents;
+    while (numStudents < 1 || numStudents > 50) {
+        cout << "Error! Invalid number. Try again: ";
+        cin >> numStudents;
+    }
+
+    cout << "Enter the number of labs (max 50): ";
+    cin >> numLabs;
+    while (numLabs < 1 || numLabs > 50) {
+        cout << "Error! Invalid number. Try again: ";
+        cin >> numLabs;
+    }
+
+    cin.ignore();
+    string studentNames[max_students];
+    int scores[max_students][max_labs];
+    int studentAverages[max_students];
+    string grades[max_students];
+
+    cout << "\nEnter the names of the students:\n";
+    for (int i = 0; i < numStudents; i++) {
+        cout << "Student #" << (i + 1) << ": ";
+        getline(cin, studentNames[i]);
+    }
+
+    cout << "\nEnter the scores for each student:\n";
+    for (int i = 0; i < numStudents; i++) {
+        for (int j = 0; j < numLabs; j++) {
+            scores[i][j] = getScore(studentNames[i], j + 1);
+        }
+        studentAverages[i] = getstudentAverages(scores[i], numLabs);
+        grades[i] = getLetterGrade(studentAverages[i]);
+    }
+
+    printTable(studentNames, scores, studentAverages, grades, numStudents, numLabs);
+    teamInfo(7);
+    return 0;
+}
+
+int getScore(string studentName, int lab) {
+    int score;
+    do {
+        cout << "Enter the score for " << studentName << ", lab #" << lab << ": ";
+        cin >> score;
+        if (score < 0 || score > 100)
+            cout << "Error: score must be between 0 and 100. Try again.\n";
+    } while (score < 0 || score > 100);
+    return score;
+}
+
+int getstudentAverages(int scores[], int numlab) {
+    int sum = 0;
+    for (int i = 0; i < numlab; i++) {
+        sum += scores[i];
+    }
+    return sum / numlab;
+}
+
+string getLetterGrade(double grade) {
+    if (grade >= 90)
+        return "A";
+    else if (grade >= 80)
+        return "B";
+    else if (grade >= 70)
+        return "C";
+    else if (grade >= 60)
+        return "D";
+    else
+        return "F";
+}
+
+void printTable(string names[], int scores[][max_labs], int studentAverages[], string grades[], int numStudents, int numLabs) {
+    cout << "\n--------------------------------\n";
+    cout << left << setw(20) << "Name";
+    for (int j = 0; j < numLabs; j++) {
+        cout << right << setw(6) << "Lab - " << (j + 1);
+    }
+    cout << right << setw(10) << "Avg" << setw(8) << "Grade" << endl;
+
+    for (int i = 0; i < numStudents; i++) {
+        cout << left << setw(20) << names[i];
+        for (int j = 0; j < numLabs; j++) {
+            cout << right << setw(6) << scores[i][j];
+        }
+        cout << right << setw(10) << studentAverages[i] << setw(8) << grades[i] << endl;
+    }
+}
+
+void teamInfo(const int lab) {
+    cout << "\n--------------------------------\n";
+    cout << "Program for CECS 2203, Sec. 06, Lab " << lab << endl;
+    cout << "Developed by Team #1:\n";
+    cout << "\tPedro Marrero Miranda, ID #155276\n";
+    cout << "\tNatanael Gonzalez Rivera, ID #120228\n";
+}
