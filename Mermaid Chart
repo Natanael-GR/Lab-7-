@@ -1,3 +1,69 @@
 https://www.mermaidchart.com/app/projects/af283e3d-560c-479c-92e9-f1dd912a252b/diagrams/e41ce665-3111-4532-8136-dab9df2715e5/share/invite/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkb2N1bWVudElEIjoiZTQxY2U2NjUtMzExMS00NTMyLTgxMzYtZGFiOWRmMjcxNWU1IiwiYWNjZXNzIjoiRWRpdCIsImlhdCI6MTc2MDY1MDU0NH0.mFDX_hWh8lC1f_FVp91BcU4-aMkDAEpZsRUbXdt6nDA
 
 https://www.mermaidchart.com/app/projects/af283e3d-560c-479c-92e9-f1dd912a252b/diagrams/82c186d5-acfc-459e-bb42-6ad862b1adac/share/invite/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkb2N1bWVudElEIjoiODJjMTg2ZDUtYWNmYy00NTllLWJiNDItNmFkODYyYjFhZGFjIiwiYWNjZXNzIjoiRWRpdCIsImlhdCI6MTc2MDY1MDY0OH0.Hm99zJ9WRgV4Fezi-zJ9a0c16KYGZG_OImWwKOWT5J4
+
+flowchart TD
+ subgraph GetScore["getScore(studentName, lab)"]
+        GS1["Prompt user for score"]
+        GS2{"score &lt; 0 or &gt; 100?"}
+        GS3["Return score"]
+  end
+ subgraph GetAvg["getstudentAverages(scores[], numlab)"]
+        GA1["Initialize sum = 0"]
+        GA2["Loop through scores"]
+        GA3["Compute average = sum / numlab"]
+        GA4["Return average"]
+  end
+ subgraph GetGrade["getLetterGrade(grade)"]
+        GG1{"grade >= 90?"}
+        GG2["Return A"]
+        GG3{"grade >= 80?"}
+        GG4["Return B"]
+        GG5{"grade >= 70?"}
+        GG6["Return C"]
+        GG7{"grade >= 60?"}
+        GG8["Return D"]
+        GG9["Return F"]
+  end
+ subgraph PrintTable["printTable(...)"]
+        PT1["Display table headers"]
+        PT2["Loop over students"]
+        PT3["Loop over labs"]
+        PT4["Print scores, averages, grades"]
+  end
+ subgraph TeamInfo["teamInfo(lab)"]
+        TI1["Display team and lab info"]
+  end
+    A["Start"] --> B["Display Lab Header"]
+    B --> C["Prompt: Enter number of students"]
+    C --> D{"Is numStudents &lt; 1 or &gt; 50?"}
+    D -- Yes --> C
+    D -- No --> E["Prompt: Enter number of labs"]
+    E --> F{"Is numLabs &lt; 1 or &gt; 50?"}
+    F -- Yes --> E
+    F -- No --> G["Input student names"]
+    G --> H["For each student: enter lab scores"]
+    H --> I["Call getScore function"]
+    I --> J["Call getstudentAverages function"]
+    J --> K["Call getLetterGrade function"]
+    K --> L["Store names, averages, and grades"]
+    L --> M["Call printTable function"]
+    M --> N["Call teamInfo function"]
+    N --> O["End Program"]
+    GS1 --> GS2
+    GS2 -- Yes --> GS1
+    GS2 -- No --> GS3
+    GA1 --> GA2
+    GA2 --> GA3
+    GA3 --> GA4
+    GG1 -- Yes --> GG2
+    GG1 -- No --> GG3
+    GG3 -- Yes --> GG4
+    GG3 -- No --> GG5
+    GG5 -- Yes --> GG6
+    GG5 -- No --> GG7
+    GG7 -- Yes --> GG8
+    GG7 -- No --> GG9
+    PT1 --> PT2
+    PT2 --> PT3
+    PT3 --> PT4
